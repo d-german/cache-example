@@ -11,6 +11,7 @@ namespace cache_example
 
         private static int ExpensiveCalculation(int value)
         {
+            Console.WriteLine($"Calculating {value}");
             Thread.Sleep(2000);
             return value * 50;
         }
@@ -24,6 +25,7 @@ namespace cache_example
                     Cache[key] = ExpensiveCalculation(key);
                 }
 
+                Console.WriteLine(Cache[key]);
                 return Cache[key];
             });
         }
@@ -31,10 +33,12 @@ namespace cache_example
         private static async Task Main(string[] args)
         {
             Console.WriteLine("....");
-            Console.WriteLine(await GetValue(5));
-            Console.WriteLine(await GetValue(10));
-            Console.WriteLine(await GetValue(5));
-            Console.WriteLine(await GetValue(10));
+            await Task.WhenAll(
+                GetValue(5),
+                GetValue(10),
+                GetValue(5),
+                GetValue(10)
+            );
         }
     }
 }
