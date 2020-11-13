@@ -9,6 +9,7 @@ namespace cache_example
     public class Program
     {
         private static readonly IDictionary<int, int> Cache = new ConcurrentDictionary<int, int>();
+        private static readonly SemaphoreSlim CacheLock = new SemaphoreSlim(initialCount: 1, maxCount: 1);
 
 
         private static int ExpensiveCalculation(int value)
@@ -20,15 +21,23 @@ namespace cache_example
 
         private static Task<int> GetValue(int key)
         {
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
-                if (!Cache.ContainsKey(key))
+                await CacheLock.WaitAsync();
+                try
                 {
-                    Cache[key] = ExpensiveCalculation(key);
-                }
+                    if (!Cache.ContainsKey(key))
+                    {
+                        Cache[key] = ExpensiveCalculation(key);
+                    }
 
-                Console.WriteLine(Cache[key]);
-                return Cache[key];
+                    Console.WriteLine(Cache[key]);
+                    return Cache[key];
+                }
+                finally
+                {
+                    CacheLock.Release();
+                }
             });
         }
 
