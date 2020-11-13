@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace cache_example
 {
@@ -14,23 +15,26 @@ namespace cache_example
             return value * 50;
         }
 
-        private static int GetValue(int key)
+        private static Task<int> GetValue(int key)
         {
-            if (!Cache.ContainsKey(key))
+            return Task.Run(() =>
             {
-                Cache[key] = ExpensiveCalculation(key);
-            }
+                if (!Cache.ContainsKey(key))
+                {
+                    Cache[key] = ExpensiveCalculation(key);
+                }
 
-            return Cache[key];
+                return Cache[key];
+            });
         }
 
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             Console.WriteLine("....");
-            Console.WriteLine(GetValue(5));
-            Console.WriteLine(GetValue(10));
-            Console.WriteLine(GetValue(5));
-            Console.WriteLine(GetValue(10));
+            Console.WriteLine(await GetValue(5));
+            Console.WriteLine(await GetValue(10));
+            Console.WriteLine(await GetValue(5));
+            Console.WriteLine(await GetValue(10));
         }
     }
 }
