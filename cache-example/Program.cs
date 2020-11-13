@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,7 +8,8 @@ namespace cache_example
 {
     public class Program
     {
-        private static readonly IDictionary<int, int> Cache = new Dictionary<int, int>();
+        private static readonly IDictionary<int, int> Cache = new ConcurrentDictionary<int, int>();
+
 
         private static int ExpensiveCalculation(int value)
         {
