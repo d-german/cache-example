@@ -16,12 +16,12 @@ namespace cache_example
 
         private static int GetValue(int key)
         {
-            if (!Cache.ContainsKey(key))
+            if (Cache.TryGetValue(key, out var result))
             {
-                Cache[key] = ExpensiveCalculation(key);
+                return result;
             }
 
-            return Cache[key];
+            return Cache[key] = ExpensiveCalculation(key);
         }
 
         private static void Main(string[] args)
