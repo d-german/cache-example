@@ -4,7 +4,9 @@
     <projectFile>cache-example.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de54de1d-48fa-4f14-876d-be6056c133ec" name="Default Changelist" comment="" />
+    <list default="true" id="de54de1d-48fa-4f14-876d-be6056c133ec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/cache-example.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/cache-example.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,15 +20,13 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AD61CA47-F8B7-4CC6-93A0-BA44CC73B5C7/86/42d08de1/IDictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/AD61CA47-F8B7-4CC6-93A0-BA44CC73B5C7/3D5/Dictionary.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/EC16EAA1-1DDC-4637-B44F-F6D7212648BB/7/ConcurrentDictionary.cs" root0="SKIP_HIGHLIGHTING" />
-  </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Program.cs" />
     </changedPaths>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="1kFPYXrrgJrWRR4KVkSZFv6nVh8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -85,7 +85,8 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
