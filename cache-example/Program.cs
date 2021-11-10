@@ -7,8 +7,8 @@ namespace cache_example
 {
     public class Program
     {
-        private static readonly ConcurrentDictionary<int, int> Cache = new ConcurrentDictionary<int, int>();
-        private static readonly SemaphoreSlim CacheLock = new SemaphoreSlim(initialCount: 1, maxCount: 1);
+        private static readonly ConcurrentDictionary<int, int> Cache = new();
+        private static readonly SemaphoreSlim CacheLock = new(initialCount: 1, maxCount: 1);
 
 
         private static int ExpensiveCalculation(int value)
