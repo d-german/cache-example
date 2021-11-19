@@ -9,23 +9,23 @@ namespace cache_example
     {
         private static readonly IDictionary<int, int> Cache = new Dictionary<int, int>();
 
-        private static int ExpensiveCalculation(int value)
-        {
-            Thread.Sleep(2000);
-            return value * 50;
-        }
-
-        private static Task<int> GetValue(int key)
+        private static Task<int> ExpensiveCalculation(int value)
         {
             return Task.Run(() =>
             {
-                if (!Cache.ContainsKey(key))
-                {
-                    Cache[key] = ExpensiveCalculation(key);
-                }
-
-                return Cache[key];
+                Thread.Sleep(2000);
+                return value * 50;
             });
+        }
+
+        private static async Task<int> GetValue(int key)
+        {
+            if (!Cache.ContainsKey(key))
+            {
+                Cache[key] = await ExpensiveCalculation(key);
+            }
+
+            return Cache[key];
         }
 
         private static async Task Main(string[] args)
