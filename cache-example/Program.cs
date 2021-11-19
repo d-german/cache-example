@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,29 +10,29 @@ namespace cache_example
     {
         private static readonly IDictionary<int, int> Cache = new Dictionary<int, int>();
 
-        private static int ExpensiveCalculation(int value)
-        {
-            Console.WriteLine($"Calculating {value}");
-            Thread.Sleep(2000);
-            return value * 50;
-        }
-
-        private static Task<int> GetValue(int key)
+        private static Task<int> ExpensiveCalculation(int value)
         {
             return Task.Run(() =>
             {
-                if (!Cache.ContainsKey(key))
-                {
-                    Cache[key] = ExpensiveCalculation(key);
-                }
-
-                Console.WriteLine(Cache[key]);
-                return Cache[key];
+                Thread.Sleep(2000);
+                return value * 50;
             });
+        }
+
+        private static async Task<int> GetValue(int key)
+        {
+            if (!Cache.ContainsKey(key))
+            {
+                Cache[key] = await ExpensiveCalculation(key);
+            }
+
+            return Cache[key];
         }
 
         private static async Task Main(string[] args)
         {
+            var sw = new Stopwatch();
+            sw.Start();
             Console.WriteLine("....");
             await Task.WhenAll(
                 GetValue(5),
@@ -39,6 +40,8 @@ namespace cache_example
                 GetValue(5),
                 GetValue(10)
             );
+
+            Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
         }
     }
 }
