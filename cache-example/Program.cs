@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,11 +31,15 @@ namespace cache_example
 
         private static async Task Main(string[] args)
         {
+            var sw = new Stopwatch();
+            sw.Start();
             Console.WriteLine("....");
             Console.WriteLine(await GetValue(5));
             Console.WriteLine(await GetValue(10));
             Console.WriteLine(await GetValue(5));
             Console.WriteLine(await GetValue(10));
+
+            Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
         }
     }
 }
