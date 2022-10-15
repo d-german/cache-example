@@ -2,8 +2,9 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>cache_example</RootNamespace>
+        <LangVersion>10</LangVersion>
     </PropertyGroup>
 
 </Project>
