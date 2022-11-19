@@ -22,12 +22,12 @@ namespace cache_example
 
         private static async Task<int> GetValue(int key)
         {
-            if (!Cache.ContainsKey(key))
+            if (Cache.TryGetValue(key, out var result))
             {
-                Cache[key] = await ExpensiveCalculation(key);
+                return result;
             }
 
-            return Cache[key];
+            return Cache[key] = await ExpensiveCalculation(key);
         }
 
         private static async Task Main(string[] args)
