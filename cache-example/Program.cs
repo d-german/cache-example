@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace cache_example
     public class Program
     {
         private static readonly IDictionary<int, int> Cache = new ConcurrentDictionary<int, int>();
-        private static readonly SemaphoreSlim CacheLock = new SemaphoreSlim(initialCount: 1, maxCount: 1);
+        private static readonly SemaphoreSlim CacheLock = new(initialCount: 1, maxCount: 1);
 
         private static int ExpensiveCalculation(int value)
         {
@@ -39,6 +40,8 @@ namespace cache_example
 
         private static async Task Main(string[] args)
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             Console.WriteLine("....");
             await Task.WhenAll(
                 GetValue(5),
@@ -46,6 +49,8 @@ namespace cache_example
                 GetValue(5),
                 GetValue(10)
             );
+            stopwatch.Stop();
+            Console.WriteLine($"Elapsed: {stopwatch.ElapsedMilliseconds}ms");
         }
     }
 }
